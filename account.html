@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Omnifood is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
+    />
+
+    <!-- Always include this line of code!!! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="img/favicon.png" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="render-sub"></div>
+    <script>
+      const renderSub = document.querySelector("#render-sub");
+      const session = JSON.parse(localStorage.getItem("session"));
+      const getSub = async () => {
+        const response = await fetch(
+          `http://localhost:3000/api/subscription/${session.email}`
+        );
+        const data = await response.json();
+        if (response.ok) {
+          const subscriptionPlane = `<div class="heading-primary">
+                                        <p>${data.plane}</p>
+                                        <button id="cancel-btn" type="submit">Cancle</button>
+                                     </div>`;
+          // Insert HTML content into the renderSub element
+          renderSub.insertAdjacentHTML("beforeend", subscriptionPlane);
+          const cancelBtn = document.querySelector("#cancel-btn");
+          cancelBtn.addEventListener("click", async () => {
+            console.log("click");
+
+            // Ensure data?.id is defined before using it in the URL
+            if (data && data.id) {
+              await fetch(
+                `http://localhost:3000/api/subscription/remove/${data.id}`,
+                {
+                  method: "DELETE",
+                }
+              );
+              window.location.href = "/#pricing";
+            } else {
+              console.error("Data or data.id is undefined.");
+            }
+          });
+        } else {
+          const errorMessage = await response.text();
+          alert("Sign up failed: " + errorMessage);
+        }
+      };
+      getSub();
+    </script>
+  </body>
+</html>
