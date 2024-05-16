@@ -78,6 +78,10 @@
     </form>
 
     <script>
+      const session = JSON.parse(localStorage.getItem("session"));
+      if (session) {
+        window.location.href = "/";
+      }
       document
         .getElementById("signup-form")
         .addEventListener("submit", async (e) => {
@@ -98,6 +102,7 @@
               },
               body: JSON.stringify(json),
             });
+            const data = await response.json();
 
             if (response.ok) {
               alert("Sign up successful!");
@@ -105,7 +110,8 @@
               localStorage.setItem(
                 "session",
                 JSON.stringify({
-                  email: json.email,
+                  email: data.email,
+                  isAdmin: data.isAdmin,
                 })
               );
               window.location.href = "/#pricing";

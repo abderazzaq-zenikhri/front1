@@ -665,3 +665,44 @@
 .footer-link:active {
   color: #555;
 }
+#sign {
+  font-size: xx-large;
+  color: #cf711f;
+}
+
+#Dont {
+  font-size: large;
+  color: #cf711f;
+}
+.body {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #fdf2e9;
+}
+
+/* .container2 {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+} */
+#signin-form {
+  background-color: #fae5d3;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #666;
+}
+.input {
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid #cf711f;
+  border-radius: 10px;
+}

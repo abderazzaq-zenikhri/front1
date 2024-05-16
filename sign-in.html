@@ -40,51 +40,78 @@
     <script defer src="js/script.js"></script>
 
     <title>sign in</title>
-    <!-- Add any additional CSS or meta tags here -->
+    <!-- Add any additional CSS or tags here -->
   </head>
-  <body>
-    <h1>sign in</h1>
-    <form id="signin-form">
-      <label for="username">Username:</label><br />
-      <input type="text" id="username" name="username" /><br />
-      <label for="password">Password:</label><br />
-      <input type="password" id="password" name="password" /><br /><br />
-      <input type="submit" value="sign in" />
-    </form>
-    <script>
-      document
-        .getElementById("signin-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
+  <body class="body">
+    <div class="container2">
+      <h1 id="sign">sign in</h1>
+      <form id="signin-form">
+        <label for="email">Email:</label><br />
+        <input class="input" type="text" id="email" name="email" /><br />
+        <label for="password">Password:</label><br />
+        <input
+          class="input"
+          type="password"
+          id="password"
+          name="password"
+        /><br /><br />
+        <input class="input" type="submit" value="sign in" />
+      </form>
+      <a href="/sign-up.html" style="margin-top: 10px" class="btn btn--outline"
+        >Dont have account yet?</a
+      >
+      <script>
+        const session = JSON.parse(localStorage.getItem("session"));
+        if (session) {
+          window.location.href = "/";
+        }
+        document
+          .getElementById("signin-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-          const formData = new FormData(e.target);
-          const json = {};
+            const formData = new FormData(e.target);
+            const json = {};
 
-          formData.forEach((value, key) => {
-            json[key] = value;
-          });
-
-          try {
-            const response = await fetch("/signup", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(json),
+            formData.forEach((value, key) => {
+              json[key] = value;
             });
 
-            if (response.ok) {
-              alert("Sign up successful!");
-              // Redirect or perform any other action upon successful sign up
-            } else {
-              const errorMessage = await response.text();
-              alert("Sign up failed: " + errorMessage);
+            try {
+              const response = await fetch(
+                "http://localhost:3000/api/sign_in",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(json),
+                }
+              );
+
+              const data = await response.json();
+
+              if (response.ok) {
+                alert("Sign in successful!");
+                // Redirect or perform any other action upon successful sign up
+                localStorage.setItem(
+                  "session",
+                  JSON.stringify({
+                    email: data.email,
+                    isAdmin: data.isAdmin,
+                  })
+                );
+                window.location.href = "/#pricing";
+              } else {
+                const errorMessage = await response.text();
+                alert("Sign in failed: " + errorMessage);
+              }
+            } catch (error) {
+              console.error("Error:", error);
+              alert("Sign in failed. Please try again later.");
             }
-          } catch (error) {
-            console.error("Error:", error);
-            alert("Sign up failed. Please try again later.");
-          }
-        });
-    </script>
+          });
+      </script>
+    </div>
   </body>
 </html>

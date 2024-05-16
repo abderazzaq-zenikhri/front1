@@ -1,18 +1,47 @@
-const myName = "Jonas Schmedtmann";
-const h1 = document.querySelector(".heading-primary");
 const plane1Btn = document.querySelector("#plane-1");
 const plane2Btn = document.querySelector("#plane-2");
 
+// handle auth in nav
+function logout() {
+  console.log(`click`);
+  localStorage.removeItem(`session`);
+  window.location.reload();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const accountNavItem = document.getElementById("account-nav-item");
+  const accountNavList = document.getElementById("account-nav-list");
+  const session = JSON.parse(localStorage.getItem("session"));
+
+  if (session) {
+    if (!session.isAdmin) {
+      accountNavItem.innerHTML =
+        '<a class="main-nav-link nav-cta" href="/account.html">My Account</a>';
+    }
+    if (session.isAdmin) {
+      accountNavItem.innerHTML =
+        '<a class="main-nav-link nav-cta" href="/admin.html">Dashboard</a>';
+    }
+    accountNavList.innerHTML += `<li><a id="logout-btn" href="#" class="main-nav-link nav-cta">Logout</a></li>`;
+  } else {
+    accountNavItem.innerHTML =
+      '<a class="main-nav-link nav-cta" href="/sign-in.html">Login</a>';
+  }
+  const logoutBtn = document.getElementById("logout-btn");
+  logoutBtn.addEventListener("click", logout);
+});
+
 // handle planes clicks
 const handleSubscriptionCreation = async (plane) => {
-  console.log("click");
-
-  localStorage.setItem("plane", JSON.stringify(plane));
-
   const session = JSON.parse(localStorage.getItem("session"));
+
   if (!session) {
-    window.location.href = "/sign-up.html";
+    return (window.location.href = "/sign-up.html");
   }
+  if (session?.isAdmin) {
+    return alert("Admins cant make subscriptions!");
+  }
+  localStorage.setItem("plane", JSON.stringify(plane));
 
   // api req : making subscriptoin
   const email = session.email;
