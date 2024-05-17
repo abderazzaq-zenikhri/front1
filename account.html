@@ -48,7 +48,7 @@
       const session = JSON.parse(localStorage.getItem("session"));
       const getSub = async () => {
         const response = await fetch(
-          `http://localhost:3000/api/subscription/${session.email}`
+          `https://zed-food-api.vercel.app/api/subscription/${session.email}`
         );
         const data = await response.json();
         if (response.ok) {
@@ -65,7 +65,7 @@
             // Ensure data?.id is defined before using it in the URL
             if (data && data.id) {
               await fetch(
-                `http://localhost:3000/api/subscription/remove/${data.id}`,
+                `https://zed-food-api.vercel.app/api/subscription/remove/${data.id}`,
                 {
                   method: "DELETE",
                 }

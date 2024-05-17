@@ -62,7 +62,9 @@
         window.location.href = "/";
       }
       const getSubs = async () => {
-        const response = await fetch(`http://localhost:3000/api/subscription`);
+        const response = await fetch(
+          `https://zed-food-api.vercel.app/api/subscription`
+        );
         const data = await response.json();
         console.log({ data });
         if (response.ok) {
@@ -93,9 +95,12 @@
       const handleClick = async (id) => {
         // Ensure data?.id is defined before using it in the URL
         if (id) {
-          await fetch(`http://localhost:3000/api/subscription/remove/${id}`, {
-            method: "DELETE",
-          });
+          await fetch(
+            `https://zed-food-api.vercel.app/api/subscription/remove/${id}`,
+            {
+              method: "DELETE",
+            }
+          );
           window.location.reload();
         } else {
           console.error("Data or id is undefined.");
