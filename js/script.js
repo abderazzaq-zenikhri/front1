@@ -48,7 +48,7 @@ const handleSubscriptionCreation = async (plane) => {
   const data = { email, plane };
 
   const response = await fetch(
-    "http://localhost:3000/api/subscription/create",
+    "https://zed-food-api.vercel.app/api/subscription/create",
     {
       method: "POST",
       headers: {
