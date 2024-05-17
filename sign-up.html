@@ -43,38 +43,70 @@
     <!-- Add any additional CSS or meta tags here -->
   </head>
   <body>
-    <h1>Sign Up</h1>
+     <header class="header">
+      <a href="#">
+        <img class="logo" alt="Zedfood logo" src="img/Zed_food.png" />
+      </a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list" id="account-nav-list">
+          <li><a class="main-nav-link" href="#how">How it works</a></li>
+          <li><a class="main-nav-link" href="#meals">Meals</a></li>
+          <li>
+            <a class="main-nav-link" href="#testimonials">Testimonials</a>
+          </li>
+          <li><a class="main-nav-link" href="#pricing">Pricing</a></li>
+         
+        </ul>
+      </nav>
+
+      <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button>
+    </header>
+    <div class="container2" >
+    <h1 class="sign">Sign Up</h1>
+    
     <form id="signup-form">
-      <label for="email">Email:</label><br />
-      <input type="email" id="email" name="email" required /><br />
+      <label for="email" class="placeholder" >Email:</label><br />
+      <input type="email" id="email" name="email "  required class="input" /><br />
 
-      <label for="password">Password:</label><br />
-      <input type="password" id="password" name="password" required /><br />
+      <label for="password" class="placeholder">Password:</label><br />
+      <input type="password" id="password" name="password" required class="input" /><br />
 
-      <label for="fullName">Full Name:</label><br />
-      <input type="text" id="fullName" name="fullName" required /><br />
+      <label for="fullName" class="placeholder">Full Name:</label><br />
+      <input type="text" id="fullName" name="fullName" required class="input" /><br />
 
-      <label for="wilaya">Wilaya:</label><br />
-      <input type="text" id="wilaya" name="wilaya" required /><br />
+      <label for="wilaya" class="placeholder">Wilaya:</label><br />
+      <input type="text" id="wilaya" name="wilaya" required class="input" /><br />
 
-      <label for="city">City:</label><br />
-      <input type="text" id="city" name="city" required /><br />
+      <label for="city" class="placeholder" >City:</label><br />
+      <input type="text" id="city" name="city" required class="input" /><br />
 
-      <label for="address">Address:</label><br />
-      <input type="text" id="address" name="address" required /><br />
+      <label for="address" class="placeholder" >Address:</label><br />
+      <input type="text" id="address" name="address" required class="input" /><br />
 
-      <label for="phoneNumber">Phone Number:</label><br />
-      <input type="tel" id="phoneNumber" name="phoneNumber" required /><br />
+      <label for="phoneNumber" class="placeholder" >Phone Number:</label><br />
+      <input type="tel" id="phoneNumber" name="phoneNumber" required class="input" /><br />
 
-      <label for="secretPassword">Secret Password:</label><br />
+      <label for="secretPassword" class="placeholder" >Secret Password:</label><br />
       <input
         type="password"
         id="secretPassword"
         name="secretPassword"
         required
+        class="input"
       /><br /><br />
 
-      <input type="submit" value="Sign Up" />
+        <button
+          type="submit"
+          class="btn"
+          style="max-width: fit-content; margin: 0 auto"
+        >
+          Sign in
+        </button>
+      </div>
     </form>
 
     <script>
