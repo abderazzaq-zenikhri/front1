@@ -52,10 +52,13 @@
         );
         const data = await response.json();
         if (response.ok) {
-          const subscriptionPlane = `<div class="heading-primary">
-                                        <p>${data.plane}</p>
-                                        <button id="cancel-btn" type="submit">Cancle</button>
-                                     </div>`;
+          const subscriptionPlane = ` <div>
+      <h2>My Subscription</h2>
+      <div class="heading-primary plane">
+        <p>${data.plane}</p>
+        <button id="cancel-btn" class="btn" type="submit">Cancel</button>
+      </div>
+    </div>`;
           // Insert HTML content into the renderSub element
           renderSub.insertAdjacentHTML("beforeend", subscriptionPlane);
           const cancelBtn = document.querySelector("#cancel-btn");

@@ -290,3 +290,20 @@ body {
 strong {
   font-weight: 500;
 }
+.plane {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+#render-sub {
+  height: 100vh;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 400px;
+  padding: 30px;
+  border-radius: 12px;
+}
+#render-sub h2 {
+  font-size: 40px;
+  margin-bottom: 35px;
+}
